@@ -1,0 +1,55 @@
+ <Box
+    component="form"
+    
+   
+    onSubmit={handleSignup} 
+  >
+    <TextField id="outlined-basic" label="Outlined" variant="outlined" />
+    <TextField id="filled-basic" label="Filled" variant="filled" />
+    <TextField id="standard-basic" label="Standard" variant="standard" />
+     {error && <div className="alert alert-danger">{error}</div>} {/* Display error message */}
+    <div className="mb-3">
+      <label htmlFor="name" className="form-label">
+        Name
+      </label>
+      <input
+        type="text"
+        className="form-control"
+        id="name"
+        placeholder="Name"
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+        required
+      />
+    </div>
+    <div className="mb-3">
+      <label htmlFor="email" className="form-label">
+        Email
+      </label>
+      <input
+        type="email"
+        className="form-control"
+        id="email"
+        placeholder="Email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        required
+      />
+    </div>
+    <div className="mb-3">
+      <label htmlFor="password" className="form-label">
+        Password
+      </label>
+      <input
+        type="password"
+        className="form-control"
+        id="password"
+        placeholder="Password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+      />
+    </div>
+    <button type="submit" className="btn btn-primary">
+      Signup
+    </button>
+  </Box>s

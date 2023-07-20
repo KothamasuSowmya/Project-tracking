@@ -1,0 +1,75 @@
+const router=require('express').Router();
+let Name=require('../models/name.model');
+const bcrypt = require('bcryptjs')
+
+router.route('/').get((req,res)=>{
+    Name.find()
+    .then(names=>res.json(names))
+    .catch(err=>res.status(400).json('Error'+err))
+})
+router.route('/signup').post((req,res)=> {
+    const{name,email,password}=req.body;
+      Name.findOne({email: email})
+      .then(user => {
+        if (user) {
+            return res.status(404).json({message:"User Already Exists!Please Login"})
+        } else{
+           
+            const user = new Name({
+                name,
+                email,
+               password
+            })
+        
+            try{
+            user.save();
+           
+            }
+            catch(err){
+            console.log(err)
+            }
+            return res.status(201).json({message:"signup done"})
+        }
+      })
+      .catch((err)=>console.log(err));
+  
+
+})
+
+router.route('/login').post((req,res)=>{
+const {email,password}=req.body;
+console.log(email)
+console.log(password)
+Name.findOne({email: email})
+.then(user => {
+    console.log(email)
+  if (!user) return res.status(404).json({message:"coudnt find user"})
+      
+
+  
+  Name.findOne({passpassword})
+  
+    .then(pass=>{console.log(password)
+        if(!pass){
+       
+            return res.status(404).json({message:"password incorrect"})
+        }
+        else{
+            return res.status(201).json({message:"Login successfull!"})
+        }
+    })
+   
+
+  }
+)
+.catch((err)=>console.log(err));
+
+
+});
+
+module.exports=router;
+
+
+
+
+
